@@ -1,9 +1,12 @@
 pipeline{
+    environment{
+	JAVA_TOOL_OPTIONS="-Duser.home=/var/maven"
+    }
     agent{
         docker{
             image 'maven:3.6.0-jdk-13'
             label 'docker-remote-agent'
-            //args '-v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /home/osboxes/maven:/var/maven/.m2 -e MAVEN_CONFIG=/var/maven/.m2'
         }
     }
     options{
